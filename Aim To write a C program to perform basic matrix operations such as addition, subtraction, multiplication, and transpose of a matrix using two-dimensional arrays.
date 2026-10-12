@@ -1,0 +1,134 @@
+#include<stdio.h>
+#define MAX 20
+
+int main()
+{
+    int i, j, k;
+    int a[MAX][MAX], b[MAX][MAX], c[MAX][MAX];
+    int r1, c1, r2, c2, ch;
+
+    printf("1. Addition\n");
+    printf("2. Subtraction\n");
+    printf("3. Multiplication\n");
+    printf("4. Division\n");
+    printf("5. Transpose\n");
+    printf("6. Exit\n");
+    printf("Enter the choice: ");
+    scanf("%d", &ch);
+
+    switch(ch)
+    {
+        case 1:
+        case 2:
+        case 4:
+            printf("Enter the rows and columns: ");
+            scanf("%d%d", &r1, &c1);
+
+            printf("Matrix A:\n");
+            for(i = 0; i < r1; i++)
+                for(j = 0; j < c1; j++)
+                    scanf("%d", &a[i][j]);
+
+            printf("Matrix B:\n");
+            for(i = 0; i < r1; i++)
+                for(j = 0; j < c1; j++)
+                    scanf("%d", &b[i][j]);
+
+            for(i = 0; i < r1; i++)
+            {
+                for(j = 0; j < c1; j++)
+                {
+                    if(ch == 1)
+                        c[i][j] = a[i][j] + b[i][j];
+                    else if(ch == 2)
+                        c[i][j] = a[i][j] - b[i][j];
+                    else
+                    {
+                        if(b[i][j] == 0)
+                        {
+                            printf("Division by zero is not possible\n");
+                            return 0;
+                        }
+                        c[i][j] = a[i][j] / b[i][j];
+                    }
+                }
+            }
+
+            printf("Result:\n");
+            for(i = 0; i < r1; i++)
+            {
+                for(j = 0; j < c1; j++)
+                    printf("%d ", c[i][j]);
+                printf("\n");
+            }
+            break;
+
+        case 3:
+            printf("Enter rows and columns of Matrix A: ");
+            scanf("%d%d", &r1, &c1);
+
+            printf("Enter rows and columns of Matrix B: ");
+            scanf("%d%d", &r2, &c2);
+
+            if(c1 != r2)
+            {
+                printf("Multiplication is not possible\n");
+                break;
+            }
+
+            printf("Matrix A:\n");
+            for(i = 0; i < r1; i++)
+                for(j = 0; j < c1; j++)
+                    scanf("%d", &a[i][j]);
+
+            printf("Matrix B:\n");
+            for(i = 0; i < r2; i++)
+                for(j = 0; j < c2; j++)
+                    scanf("%d", &b[i][j]);
+
+            for(i = 0; i < r1; i++)
+            {
+                for(j = 0; j < c2; j++)
+                {
+                    c[i][j] = 0;
+                    for(k = 0; k < c1; k++)
+                        c[i][j] += a[i][k] * b[k][j];
+                }
+            }
+
+            printf("Result:\n");
+            for(i = 0; i < r1; i++)
+            {
+                for(j = 0; j < c2; j++)
+                    printf("%d ", c[i][j]);
+                printf("\n");
+            }
+            break;
+
+        case 5:
+            printf("Enter the rows and columns: ");
+            scanf("%d%d", &r1, &c1);
+
+            printf("Matrix A:\n");
+            for(i = 0; i < r1; i++)
+                for(j = 0; j < c1; j++)
+                    scanf("%d", &a[i][j]);
+
+            printf("Transpose of Matrix A:\n");
+            for(j = 0; j < c1; j++)
+            {
+                for(i = 0; i < r1; i++)
+                    printf("%d ", a[i][j]);
+                printf("\n");
+            }
+            break;
+
+        case 6:
+            break;
+
+        default:
+            printf("Invalid choice\n");
+    }
+
+    return 0;
+}
