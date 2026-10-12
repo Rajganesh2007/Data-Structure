@@ -1,0 +1,76 @@
+#include<stdio.h>
+#define MAX 20
+
+int q[MAX];
+int front=-1,rear=-1;
+void enqueue()
+{
+    int x;
+    if((rear + 1)%MAX == front)
+    {
+        printf("Queue Overflow");
+        return;
+    }
+    printf("Enter the element : ");
+    scanf("%d",&x);
+    if(front==-1)
+        front=rear = 0;
+    rear = (rear + 1)% MAX;
+    q[rear]=x;
+}
+void dequeue()
+{
+    if(front==-1)
+    {
+        printf("Queue Underflow");
+        return;
+    }
+    printf("Deleting the element : %d ",q[front]);
+    if(front==rear)
+        front = rear = -1;
+    else 
+        front = (front + 1)% MAX;
+}
+
+void display()
+{
+    int i;
+    if(front==-1)
+    {
+        printf("Queue is an Empty");
+        return;
+    }
+    printf("Queue elements: ");
+    i=front;
+    while(1)
+        {
+            printf("%d",q[i]);
+            if(i==rear)
+                break;
+            i=(i+1)%MAX;
+        }
+    printf("\n");
+}
+int main()
+{
+    int ch;
+
+    do{
+        printf("1.Enqueue\n");
+        printf("2.Dequeue\n");
+        printf("3.Display\n");
+        printf("4.Exit\n");
+        printf("Enter the choice : ");
+        scanf("%d",&ch);
+
+        switch(ch)
+            {
+                case 1:enqueue();break;
+                case 2:dequeue();break;
+                case 3:display();break;
+                case 4:break;
+                default : printf("Invalid choice");
+            }
+    }while(ch != 4);
+    return 0;
+}
